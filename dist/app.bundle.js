@@ -835,7 +835,7 @@ function drawHomeContent() {
   drawDownTriangle(h.deltaTriangle.x, h.deltaTriangle.y, RED);
   text("0,004894 $ (-0.00%)", h.delta.x, h.delta.y, h.delta.size, RED, "center", 600);
 
-  h.quickActions.forEach((action) => img(action.path, action.x, action.y, action.w, action.h));
+  drawQuickActions(h.quickActions);
 
   rect(h.promo.x, h.promo.y, h.promo.w, h.promo.h, PANEL, h.promo.r);
   rect(h.promo.x, h.promo.y, 90, 66, "#ffd42a", 0);
@@ -872,6 +872,42 @@ function drawHomeTabs(y) {
       ? "assets/ui/asset-tabs-nft.png"
       : "assets/ui/asset-tabs-crypto.png";
   img(tabAsset, 0, y - 48, 1080, 126);
+}
+
+function drawQuickActions(actions) {
+  const labels = ["\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c", "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c", "\u041e\u0431\u043c\u0435\u043d", "\u041f\u043e\u043a\u0443\u043f\u043a\u0430"];
+  actions.forEach((action, index) => {
+    const cx = action.x + action.w / 2;
+    const buttonY = action.y + 8;
+    const active = index === 2;
+    rect(cx - 70, buttonY, 140, 140, active ? GREEN : "#2d2e33", 36);
+    drawQuickActionIcon(cx, buttonY + 70, index, active ? "#07150f" : TEXT);
+    text(labels[index], cx, action.y + 205, 39, TEXT, "center", 800);
+  });
+}
+
+function drawQuickActionIcon(cx, cy, type, color) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  if (type === 0) {
+    line(cx - 25, cy + 24, cx + 30, cy - 31, color, 8);
+    line(cx + 30, cy - 31, cx + 30, cy + 10, color, 8);
+    line(cx + 30, cy - 31, cx - 10, cy - 31, color, 8);
+  } else if (type === 1) {
+    line(cx, cy - 33, cx, cy + 30, color, 8);
+    line(cx, cy + 30, cx - 27, cy + 4, color, 8);
+    line(cx, cy + 30, cx + 27, cy + 4, color, 8);
+  } else if (type === 2) {
+    imgTint("assets/native-ui/qa-swap-icon.png", cx - 41, cy - 40, 82, 80, color);
+  } else {
+    line(cx - 34, cy, cx + 34, cy, color, 8);
+    line(cx, cy - 34, cx, cy + 34, color, 8);
+  }
+  ctx.restore();
 }
 
 function drawAssetRows() {
@@ -2204,7 +2240,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas107");
+  supportRow(980, "Версия интерфейса", "canvas108");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
