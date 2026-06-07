@@ -1359,8 +1359,8 @@ function drawHistory() {
   text("History", 540, 196, 44, TEXT, "center", 700);
   historyTabs();
   historyFilters();
-  text("30 мая 2026г.", 44, 560, 36, TEXT, "left", 700);
   const rows = historyScreenItems();
+  text(historyDateLabel(rows[0]?.date), 44, 560, 36, TEXT, "left", 700);
   let y = 725;
   rows.forEach((tx, i) => {
     historyScreenRow(y, tx);
@@ -1373,6 +1373,12 @@ function drawHistory() {
       y += 178;
     }
   });
+}
+
+function historyDateLabel(value) {
+  if (!value) return "30 мая 2026г.";
+  const clean = String(value).replace(/\s+\d{1,2}:\d{2}$/, "").replace(" г.", "г.");
+  return clean.endsWith("г.") ? clean : clean;
 }
 
 function historyTabs() {
@@ -1395,8 +1401,8 @@ function historyFilters() {
 function historyScreenItems() {
   if (state.txs.length) return state.txs;
   return [
-    { sent: true, title: "Отправлено", address: "В: 0x97b6...eA491", amount: "-1 USDT", fiat: "≈ $0.9994" },
-    { sent: false, title: "Получено", address: "Из: 0xA711...9fF6A", amount: "+2.04 USDT", fiat: "≈ $2.04" },
+    { sent: true, title: "Отправлено", address: "В: 0x97b6...eA491", amount: "-1 USDT", fiat: "≈ $0.9994", date: "30 мая 2026 г. 23:20" },
+    { sent: false, title: "Получено", address: "Из: 0xA711...9fF6A", amount: "+2.04 USDT", fiat: "≈ $2.04", date: "30 мая 2026 г. 23:20" },
   ];
 }
 
@@ -2198,7 +2204,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas105");
+  supportRow(980, "Версия интерфейса", "canvas106");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
@@ -2279,9 +2285,10 @@ function drawWalletEditorSheet() {
     if (tx) {
       text(`Выбрана: ${state.walletEditorTxIndex + 1}`, 992, layout.txCardY + 58, 30, MUTED, "right", 600);
     }
-    walletEditorButton(88, layout.txButtonsY, 190, 72, "Сумма", "#34363b");
-    walletEditorButton(310, layout.txButtonsY, 190, 72, "Адрес", "#34363b");
-    walletEditorButton(532, layout.txButtonsY, 190, 72, "Тип", "#34363b");
+    walletEditorButton(74, layout.txButtonsY, 160, 72, "Сумма", "#34363b");
+    walletEditorButton(254, layout.txButtonsY, 160, 72, "Адрес", "#34363b");
+    walletEditorButton(434, layout.txButtonsY, 140, 72, "Дата", "#34363b");
+    walletEditorButton(594, layout.txButtonsY, 140, 72, "Тип", "#34363b");
     walletEditorButton(754, layout.txButtonsY, 238, 72, "Удалить", "#3a2529", "#ff8a96");
   } else {
     text("Нажмите Отправку или Получение", 88, layout.txCardY + 157, 34, MUTED, "left", 500);
@@ -2341,6 +2348,7 @@ function drawWalletEditorTxList(layout) {
     const selected = index === walletEditorSelectedIndex();
     if (selected) rect(62, y - 58, 956, 112, "#303238", 28);
     historyRow(y, tx.sent, tx.title, tx.address, tx.amount, tx.fiat);
+    if (tx.date) text(tx.date, 160, y + 54, 24, MUTED, "left", 500);
   });
   ctx.restore();
   if (maxScroll > 0) {
@@ -3421,6 +3429,7 @@ function createSendTx() {
     network: state.sendNetwork,
     assetId: state.sendAsset === "TRX" ? "trx" : state.sendAsset === "USDT_TON" ? "usdtTon" : "usdtTron",
     value,
+    date: "30 мая 2026 г. 23:20",
   };
   state.txs.unshift(tx);
   state.selectedTx = tx;
@@ -3448,15 +3457,19 @@ function handleWalletEditorTap(x, y) {
   else if (hit(x, y, 782, layout.addY + 32, 992, layout.addY + 106)) addWalletEditorOperation(false);
   else if (hit(x, y, 44, layout.addY, 1036, layout.addY + 138)) addWalletEditorOperation(state.txs[0]?.sent !== false);
   else if (handleWalletEditorTxTap(x, y, layout)) {}
-  else if (hit(x, y, 88, layout.txButtonsY, 278, layout.txButtonsY + 72)) {
+  else if (hit(x, y, 74, layout.txButtonsY, 234, layout.txButtonsY + 72)) {
     ensureEditableTx();
     openEditor("txAmount");
   }
-  else if (hit(x, y, 310, layout.txButtonsY, 500, layout.txButtonsY + 72)) {
+  else if (hit(x, y, 254, layout.txButtonsY, 414, layout.txButtonsY + 72)) {
     ensureEditableTx();
     openEditor("txAddress");
   }
-  else if (hit(x, y, 532, layout.txButtonsY, 722, layout.txButtonsY + 72)) {
+  else if (hit(x, y, 434, layout.txButtonsY, 574, layout.txButtonsY + 72)) {
+    ensureEditableTx();
+    openEditor("txDate");
+  }
+  else if (hit(x, y, 594, layout.txButtonsY, 734, layout.txButtonsY + 72)) {
     ensureEditableTx();
     toggleLastTxType();
   }
@@ -3544,6 +3557,7 @@ function addManualTx(sent) {
     network: asset.network,
     assetId: asset.id,
     value,
+    date: "30 мая 2026 г. 23:20",
   };
   state.txs.unshift(tx);
   state.selectedTx = tx;
@@ -3566,6 +3580,7 @@ function walletEditorExistingTx(sent = true) {
     network: asset.network,
     assetId: asset.id,
     value,
+    date: "30 мая 2026 г. 23:20",
   };
 }
 
@@ -3611,6 +3626,12 @@ function setLastTxAddress(address) {
   tx.address = `${tx.sent ? "В" : "От"}: ${ellipsizeAddress(address)}`;
 }
 
+function setLastTxDate(value) {
+  const tx = walletEditorSelectedTx();
+  if (!tx) return;
+  tx.date = value;
+}
+
 function toggleLastTxType() {
   const tx = walletEditorSelectedTx();
   if (!tx) return;
@@ -3645,6 +3666,10 @@ function openEditor(mode) {
     editorLabel.textContent = "Адрес операции";
     editorInput.value = walletEditorSelectedTx()?.rawAddress || state.sendAddress;
     editorInput.inputMode = "text";
+  } else if (mode === "txDate") {
+    editorLabel.textContent = "Дата операции";
+    editorInput.value = walletEditorSelectedTx()?.date || "30 мая 2026 г. 23:20";
+    editorInput.inputMode = "text";
   } else {
     editorLabel.textContent = mode === "address" ? "Адрес получателя" : `Сумма ${sendAssetDisplay()}`;
     editorInput.value = mode === "address" ? state.sendAddress : String(state.sendAmount).replace(".", ",");
@@ -3674,6 +3699,8 @@ function applyEditor() {
     if (Number.isFinite(n) && n >= 0) setLastTxAmount(n);
   } else if (editorMode === "txAddress" && value) {
     setLastTxAddress(value);
+  } else if (editorMode === "txDate" && value) {
+    setLastTxDate(value);
   } else if (editorMode === "amount") {
     const n = Number(value.replace(",", "."));
     if (Number.isFinite(n) && n > 0) state.sendAmount = Math.min(n, sendBalance());
