@@ -15,13 +15,13 @@ const TEXT = "#f4f4f7";
 const RED = "#ff5c6b";
 
 const HOME_SCREEN = {
-  topSettings: { x: 78, y: 148, w: 96, h: 98 },
+  topSettings: { x: 50, y: 134, w: 116, h: 118 },
   notificationDot: { x: 126, y: 174, size: 15 },
-  searchPill: { x: 178, y: 148, w: 682, h: 108 },
-  topScan: { x: 928, y: 150, w: 96, h: 98 },
-  walletChip: { x: 315, y: 365, w: 448, h: 82 },
+  searchPill: { x: 184, y: 132, w: 700, h: 126 },
+  topScan: { x: 928, y: 134, w: 116, h: 118 },
+  walletChip: { x: 312, y: 365, w: 456, h: 82 },
   walletText: { x: 540, y: 417, size: 37 },
-  copyIcon: { x: 669, y: 384, size: 42 },
+  copyIcon: { x: 804, y: 379, size: 56 },
   balance: { x: 540, y: 648, size: 108 },
   deltaTriangle: { x: 304, y: 728 },
   delta: { x: 540, y: 750, size: 36 },
@@ -816,14 +816,14 @@ function drawHomeTopBar() {
   const h = HOME_SCREEN;
   const compact = state.scrollY > 260;
   rect(0, 0, 1080, compact ? 286 : 300, BG, 0);
-  img("assets/native-ui/top-settings-clean.png", h.topSettings.x, h.topSettings.y, h.topSettings.w, h.topSettings.h);
+  drawTopSettingsButton(h.topSettings);
   if (compact) {
     text(`${money(walletTotalUsd())} $`, 540, 205, 43, TEXT, "center", 800, true);
     drawSearch(818, 202, MUTED, 0.78);
   } else {
-    img("assets/native-ui/top-search-pill.png", h.searchPill.x, h.searchPill.y, h.searchPill.w, h.searchPill.h);
+    drawTopSearchPill(h.searchPill);
   }
-  img("assets/native-ui/top-scan.png", h.topScan.x, h.topScan.y, h.topScan.w, h.topScan.h);
+  drawTopScanButton(h.topScan);
 }
 
 function drawHomeContent() {
@@ -872,6 +872,38 @@ function drawHomeTabs(y) {
       ? "assets/ui/asset-tabs-nft.png"
       : "assets/ui/asset-tabs-crypto.png";
   img(tabAsset, 0, y - 48, 1080, 126);
+}
+
+function drawTopSettingsButton(box) {
+  const cx = box.x + box.w / 2;
+  const cy = box.y + box.h / 2;
+  imgTint("assets/native-ui/settings-icon.svg", cx - 36, cy - 36, 72, 72, MUTED);
+  circle(cx + 24, cy - 42, 14, RED);
+}
+
+function drawTopSearchPill(box) {
+  rect(box.x, box.y, box.w, box.h, "#2d2e31", box.h / 2);
+  drawSearch(box.x + 70, box.y + box.h / 2, MUTED, 0.82);
+  text("\u041f\u043e\u0438\u0441\u043a", box.x + 128, box.y + box.h / 2 + 17, 38, "#8d8e94", "left", 500);
+}
+
+function drawTopScanButton(box) {
+  const cx = box.x + box.w / 2;
+  const cy = box.y + box.h / 2;
+  drawScanCorners(cx, cy, 58, MUTED, 7);
+}
+
+function drawScanCorners(cx, cy, size, color, width) {
+  const h = size / 2;
+  const corner = size * 0.33;
+  line(cx - h, cy - h, cx - h + corner, cy - h, color, width);
+  line(cx - h, cy - h, cx - h, cy - h + corner, color, width);
+  line(cx + h, cy - h, cx + h - corner, cy - h, color, width);
+  line(cx + h, cy - h, cx + h, cy - h + corner, color, width);
+  line(cx - h, cy + h, cx - h + corner, cy + h, color, width);
+  line(cx - h, cy + h, cx - h, cy + h - corner, color, width);
+  line(cx + h, cy + h, cx + h - corner, cy + h, color, width);
+  line(cx + h, cy + h, cx + h, cy + h - corner, color, width);
 }
 
 function drawQuickActions(actions) {
@@ -2240,7 +2272,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas108");
+  supportRow(980, "Версия интерфейса", "canvas110");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
