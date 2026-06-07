@@ -2204,7 +2204,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas106");
+  supportRow(980, "Версия интерфейса", "canvas107");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
@@ -2495,7 +2495,7 @@ function drawTxDetail() {
   txLine(1538, tx?.sent ? "Получатель" : "Отправитель", ellipsizeAddress(tx?.rawAddress || state.sendAddress));
   rect(44, 1665, 992, 195, "#313236", 26);
   text("Комиссия сети", 88, 1767, 34, MUTED, "left", 400);
-  imgTint("assets/native-ui/info-icon.svg", 296, 1739, 38, 38, MUTED);
+  imgTint("assets/native-ui/info-icon.svg", 328, 1744, 30, 30, MUTED);
   text(tx?.feeAmount || `${amount(feeAmount(), 8)} ${feeSymbol()}`, 992, 1760, 36, TEXT, "right", 400);
   if (tx?.feeFiat !== "") text(tx?.feeFiat || `≈ $${money(feeFiat())}`, 992, 1813, 34, MUTED, "right", 400);
   strokeRect(44, 2038, 992, 158, "#3d3e42", 18, 2, [8, 8]);
@@ -3045,7 +3045,22 @@ function drawDownTriangle(x, y, color) {
 }
 
 function drawTxArrow(cx, cy, up) {
-  imgTintRotated("assets/native-ui/arrow-right-icon.svg", cx, cy, 62, 62, MUTED, up ? -Math.PI / 2 : Math.PI / 2);
+  const dir = up ? -1 : 1;
+  const color = "#92939a";
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  ctx.moveTo(cx, cy + dir * 24);
+  ctx.lineTo(cx, cy - dir * 22);
+  ctx.moveTo(cx, cy - dir * 22);
+  ctx.lineTo(cx - 17, cy - dir * 5);
+  ctx.moveTo(cx, cy - dir * 22);
+  ctx.lineTo(cx + 17, cy - dir * 5);
+  ctx.stroke();
+  ctx.restore();
 }
 
 function drawFeatureIcon(cx, cy, type) {
