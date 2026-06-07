@@ -877,7 +877,7 @@ function drawHomeTabs(y) {
 function drawTopSettingsButton(box) {
   const cx = box.x + box.w / 2;
   const cy = box.y + box.h / 2;
-  imgTint("assets/native-ui/settings-icon.svg", cx - 36, cy - 36, 72, 72, MUTED);
+  drawThinGearIcon(cx, cy, 66, MUTED);
   circle(cx + 24, cy - 42, 14, RED);
 }
 
@@ -890,12 +890,12 @@ function drawTopSearchPill(box) {
 function drawTopScanButton(box) {
   const cx = box.x + box.w / 2;
   const cy = box.y + box.h / 2;
-  drawScanCorners(cx, cy, 58, MUTED, 7);
+  drawScanCorners(cx, cy, 58, MUTED, 6);
 }
 
 function drawScanCorners(cx, cy, size, color, width) {
   const h = size / 2;
-  const corner = size * 0.33;
+  const corner = size * 0.3;
   line(cx - h, cy - h, cx - h + corner, cy - h, color, width);
   line(cx - h, cy - h, cx - h, cy - h + corner, color, width);
   line(cx + h, cy - h, cx + h - corner, cy - h, color, width);
@@ -904,6 +904,33 @@ function drawScanCorners(cx, cy, size, color, width) {
   line(cx - h, cy + h, cx - h, cy + h - corner, color, width);
   line(cx + h, cy + h, cx + h - corner, cy + h, color, width);
   line(cx + h, cy + h, cx + h, cy + h - corner, color, width);
+}
+
+function drawThinGearIcon(cx, cy, size, color) {
+  const teeth = 8;
+  const innerR = size * 0.22;
+  const rootR = size * 0.34;
+  const outerR = size * 0.43;
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  for (let i = 0; i < teeth * 2; i++) {
+    const a = -Math.PI / 2 + i * Math.PI / teeth;
+    const r = i % 2 === 0 ? outerR : rootR;
+    const x = cx + Math.cos(a) * r;
+    const y = cy + Math.sin(a) * r;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
 }
 
 function drawQuickActions(actions) {
@@ -2272,7 +2299,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas110");
+  supportRow(980, "Версия интерфейса", "canvas111");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
