@@ -953,22 +953,21 @@ function drawQuickActionIcon(cx, cy, type, color) {
   ctx.save();
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
-  ctx.lineWidth = 8;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
   if (type === 0) {
-    line(cx - 25, cy + 24, cx + 30, cy - 31, color, 8);
-    line(cx + 30, cy - 31, cx + 30, cy + 10, color, 8);
-    line(cx + 30, cy - 31, cx - 10, cy - 31, color, 8);
+    line(cx - 21, cy + 20, cx + 25, cy - 26, color, 7);
+    line(cx + 25, cy - 26, cx + 25, cy + 8, color, 7);
+    line(cx + 25, cy - 26, cx - 8, cy - 26, color, 7);
   } else if (type === 1) {
-    line(cx, cy - 33, cx, cy + 30, color, 8);
-    line(cx, cy + 30, cx - 27, cy + 4, color, 8);
-    line(cx, cy + 30, cx + 27, cy + 4, color, 8);
+    line(cx, cy - 28, cx, cy + 26, color, 7);
+    line(cx, cy + 26, cx - 23, cy + 4, color, 7);
+    line(cx, cy + 26, cx + 23, cy + 4, color, 7);
   } else if (type === 2) {
-    imgTint("assets/native-ui/qa-swap-icon.png", cx - 41, cy - 40, 82, 80, color);
+    imgTint("assets/native-ui/qa-swap-icon.png", cx - 47, cy - 46, 94, 92, color);
   } else {
-    line(cx - 34, cy, cx + 34, cy, color, 8);
-    line(cx, cy - 34, cx, cy + 34, color, 8);
+    line(cx - 28, cy, cx + 28, cy, color, 7);
+    line(cx, cy - 28, cx, cy + 28, color, 7);
   }
   ctx.restore();
 }
@@ -2303,7 +2302,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas123");
+  supportRow(980, "Версия интерфейса", "canvas124");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
