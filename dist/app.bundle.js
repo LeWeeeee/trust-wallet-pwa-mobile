@@ -2303,7 +2303,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas119");
+  supportRow(980, "Версия интерфейса", "canvas120");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
@@ -2564,6 +2564,7 @@ function confirmRow(y, label, value, sub = null) {
 
 function drawProcessing() {
   const top = 1010;
+  const actionY = sheetActionY(2010);
   rect(0, top, 1080, BASE_H - top, "#171718", 38);
   iconClose(998, 1040, MUTED, 56);
   img("assets/native-ui/processing-success-art.png", 380, 1018, 320, 330);
@@ -2572,8 +2573,8 @@ function drawProcessing() {
   text("время проводится валидация в", 540, 1636, 38, MUTED, "center", 400);
   text("блокчейне. Это может занять несколько", 540, 1688, 38, MUTED, "center", 400);
   text("минут.", 540, 1740, 38, MUTED, "center", 400);
-  rect(88, 2010, 904, 132, "#27d68b", 66);
-  text("Детали транзакции", 540, 2092, 42, "#121814", "center", 500);
+  rect(88, actionY, 904, 132, "#27d68b", 66);
+  text("Детали транзакции", 540, actionY + 82, 42, "#121814", "center", 500);
   rect(0, 2265, 1080, BASE_H - 2265, "#070708", 0);
   img("assets/native-ui/processing-gesture-bar.png", 330, 2360, 420, 35);
 }
