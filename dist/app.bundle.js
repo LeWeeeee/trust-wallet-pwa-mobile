@@ -2299,7 +2299,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas114");
+  supportRow(980, "Версия интерфейса", "canvas115");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
@@ -2897,7 +2897,7 @@ function tradeRow(y, title, subtitle, icon) {
 
 // ----- src/70_components.js -----
 function drawBottomNav(active, dimmed = false) {
-  const y = BASE_H - 250 - SAFE_BOTTOM;
+  const y = bottomNavY();
   const centers = bottomNavCenters();
   ctx.save();
   drawBottomNavBackdrop(y - 20);
@@ -2931,7 +2931,7 @@ function drawWalletBottomNav(active, alpha = 1) {
 }
 
 function navItem(cx, type, label, active) {
-  const y = BASE_H - 250 - SAFE_BOTTOM;
+  const y = bottomNavY();
   if (active) rect(cx - 86, y + 14, 172, 144, "#1c4b2e", 72);
   const color = active ? GREEN : MUTED;
   if (type === "home") imgTint("assets/native-ui/nav-main-icon.png", cx - 28, y + 32, 56, 45, color);
@@ -2944,10 +2944,14 @@ function navItem(cx, type, label, active) {
 }
 
 function drawTradeNavItem(cx, active) {
-  const y = BASE_H - 250 - SAFE_BOTTOM;
+  const y = bottomNavY();
   rect(cx - 70, y - 50, 140, 140, GREEN, 70);
   imgTint("assets/native-ui/nav-trade-icon.png", cx - 34, y - 12, 68, 69, "#07150f");
   text("\u041e\u0431\u043c\u0435\u043d", cx, y + 149, 24, active ? TEXT : MUTED, "center", 600);
+}
+
+function bottomNavY() {
+  return NAV_TOP - SAFE_BOTTOM;
 }
 
 function drawInfinityIcon(cx, cy, size, color) {
@@ -3356,7 +3360,7 @@ function setView(view) {
 }
 
 function handleBottomNavTap(x, y) {
-  const navTop = BASE_H - 250 - SAFE_BOTTOM;
+  const navTop = bottomNavY();
   if (hit(x, y, 8, navTop, 220, BASE_H)) {
     setView("home");
     return true;
