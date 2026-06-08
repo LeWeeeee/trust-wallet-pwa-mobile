@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="shield" x1="168" y1="128" x2="344" y2="388" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2a57ff"/>
-      <stop offset="1" stop-color="#0a7cff"/>
+    <linearGradient id="rightShield" x1="256" y1="112" x2="360" y2="302" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6df68f"/>
+      <stop offset="0.42" stop-color="#16a8ff"/>
+      <stop offset="1" stop-color="#0b40ff"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="#ffffff"/>
-  <path d="M256 104c48 40 94 54 129 56 2 54-6 106-24 151-20 50-59 93-105 116-46-23-85-66-105-116-18-45-26-97-24-151 35-2 81-16 129-56Z" fill="url(#shield)"/>
+  <rect width="512" height="512" fill="#ffffff"/>
+  <path d="M256 94c-51 22-101 35-158 40v122c0 77 42 145 102 184 18 12 37 23 56 31V94Z" fill="#1f19ff"/>
+  <path d="M256 94c51 22 101 35 158 40v122c0 77-42 145-102 184-18 12-37 23-56 31V94Z" fill="url(#rightShield)"/>
 </svg>

@@ -1,6 +1,6 @@
 {
-  "name": "Trust",
-  "short_name": "Trust",
+  "name": "Trust Wallet",
+  "short_name": "Trust Wallet",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#1b1b1c",
@@ -10,13 +10,13 @@
     {
       "src": "assets/icon-trust.svg",
       "sizes": "180x180",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
       "src": "assets/icon-trust.svg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     }
   ]
