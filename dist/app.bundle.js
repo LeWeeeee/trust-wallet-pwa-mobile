@@ -815,15 +815,14 @@ function drawHome() {
 function drawHomeTopBar() {
   const h = HOME_SCREEN;
   const compact = state.scrollY > 260;
-  rect(0, 0, 1080, compact ? 286 : 300, BG, 0);
-  drawTopSettingsButton(h.topSettings);
   if (compact) {
-    text(`${money(walletTotalUsd())} $`, 540, 205, 43, TEXT, "center", 800, true);
-    drawSearch(818, 202, MUTED, 0.78);
+    drawCompactTopBar();
   } else {
+    rect(0, 0, 1080, 300, BG, 0);
+    drawTopSettingsButton(h.topSettings);
     drawTopSearchPill(h.searchPill);
+    drawTopScanButton(h.topScan);
   }
-  drawTopScanButton(h.topScan);
 }
 
 function drawHomeContent() {
@@ -872,6 +871,15 @@ function drawHomeTabs(y) {
       ? "assets/ui/asset-tabs-nft.png"
       : "assets/ui/asset-tabs-crypto.png";
   img(tabAsset, 0, y - 48, 1080, 126);
+}
+
+function drawCompactTopBar() {
+  rect(0, 0, 1080, 142, BG, 0);
+  drawThinGearIcon(86, 88, 54, MUTED);
+  circle(132, 36, 11, RED);
+  text(`${money(walletTotalUsd())} $`, 540, 98, 43, TEXT, "center", 800, true);
+  drawSearch(824, 86, MUTED, 0.6);
+  drawScanCorners(980, 86, 50, MUTED, 5.5);
 }
 
 function drawTopSettingsButton(box) {
@@ -2295,7 +2303,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas118");
+  supportRow(980, "Версия интерфейса", "canvas119");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
