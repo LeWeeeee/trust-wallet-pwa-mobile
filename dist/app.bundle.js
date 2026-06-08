@@ -875,19 +875,17 @@ function drawHomeTabs(y) {
 
 function drawCompactTopBar() {
   rect(0, 0, 1080, 118, BG, 0);
-  drawThinGearIcon(42, 30, 34, MUTED);
-  circle(74, 10, 8, RED);
-  text(`${money(walletTotalUsd())} $`, 540, 31, 35, TEXT, "center", 800, true);
+  img("assets/native-ui/top-settings-clean.png", 34, 22, 104, 104);
+  circle(124, 20, 11, RED);
+  text(`${money(walletTotalUsd())} $`, 540, 33, 35, TEXT, "center", 800, true);
   rect(478, 58, 124, 4, GREEN, 2);
-  drawSearch(896, 28, MUTED, 0.42);
-  drawScanCorners(996, 28, 30, MUTED, 4.5);
+  drawSearch(854, 30, MUTED, 0.42);
+  img("assets/native-ui/top-scan.png", 940, 22, 104, 104);
 }
 
 function drawTopSettingsButton(box) {
-  const cx = box.x + box.w / 2;
-  const cy = box.y + box.h / 2;
-  drawThinGearIcon(cx, cy, 66, MUTED);
-  circle(cx + 24, cy - 42, 14, RED);
+  img("assets/native-ui/top-settings-clean.png", box.x, box.y, box.w, box.h);
+  circle(box.x + box.w * 0.78, box.y + box.h * 0.12, 14, RED);
 }
 
 function drawTopSearchPill(box) {
@@ -897,9 +895,7 @@ function drawTopSearchPill(box) {
 }
 
 function drawTopScanButton(box) {
-  const cx = box.x + box.w / 2;
-  const cy = box.y + box.h / 2;
-  drawScanCorners(cx, cy, 56, MUTED, 5.5);
+  img("assets/native-ui/top-scan.png", box.x, box.y, box.w, box.h);
 }
 
 function drawScanCorners(cx, cy, size, color, width) {
@@ -2304,7 +2300,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas121");
+  supportRow(980, "Версия интерфейса", "canvas122");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
