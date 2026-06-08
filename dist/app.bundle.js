@@ -2302,7 +2302,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas124");
+  supportRow(980, "Версия интерфейса", "canvas125");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
@@ -2955,7 +2955,7 @@ function drawTradeNavItem(cx, active) {
 }
 
 function bottomNavY() {
-  return NAV_TOP - SAFE_BOTTOM;
+  return BASE_H - 190;
 }
 
 function drawInfinityIcon(cx, cy, size, color) {
