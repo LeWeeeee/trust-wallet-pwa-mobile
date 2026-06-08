@@ -2299,7 +2299,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas111");
+  supportRow(980, "Версия интерфейса", "canvas112");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
@@ -2951,21 +2951,17 @@ function drawTradeNavItem(cx, active) {
 }
 
 function drawInfinityIcon(cx, cy, size, color) {
-  const halfW = size * 0.235;
-  const halfH = size * 0.118;
-  const c = size * 0.185;
+  const gap = size * 0.125;
+  const rx = size * 0.16;
+  const ry = size * 0.105;
   ctx.save();
   ctx.strokeStyle = color;
-  ctx.lineWidth = Math.max(6, size * 0.082);
+  ctx.lineWidth = Math.max(5, size * 0.058);
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
-  ctx.miterLimit = 1;
   ctx.beginPath();
-  ctx.moveTo(cx, cy);
-  ctx.bezierCurveTo(cx - c, cy - halfH, cx - halfW, cy - halfH, cx - halfW, cy);
-  ctx.bezierCurveTo(cx - halfW, cy + halfH, cx - c, cy + halfH, cx, cy);
-  ctx.bezierCurveTo(cx + c, cy - halfH, cx + halfW, cy - halfH, cx + halfW, cy);
-  ctx.bezierCurveTo(cx + halfW, cy + halfH, cx + c, cy + halfH, cx, cy);
+  ctx.ellipse(cx - gap, cy, rx, ry, 0, 0, Math.PI * 2);
+  ctx.ellipse(cx + gap, cy, rx, ry, 0, 0, Math.PI * 2);
   ctx.stroke();
   ctx.restore();
 }
