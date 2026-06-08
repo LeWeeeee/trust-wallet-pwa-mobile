@@ -1009,10 +1009,10 @@ function homePerpsCard(x, y, symbol, volume, coin) {
   rect(x, y, 360, 255, PANEL, 28);
   circleImg(coin, x + 44, y + 42, 76);
   text(symbol, x + 135, y + 92, 38, TEXT, "left", 600);
-  text(`\u0422\u043e\u0440\u0433\u0443\u0439\u0442\u0435 ${symbol} \u0441`, x + 44, y + 150, 27, MUTED, "left", 400);
-  text("\u043a\u0440\u0435\u0434\u0438\u0442\u043d\u044b\u043c \u043f\u043b\u0435\u0447\u043e\u043c", x + 44, y + 188, 27, MUTED, "left", 400);
-  text("\u0434\u043e 200x", x + 44, y + 226, 27, MUTED, "left", 400);
-  text(volume, x + 44, y + 260, 28, MUTED, "left", 400);
+  text(`\u0422\u043e\u0440\u0433\u0443\u0439\u0442\u0435 ${symbol} \u0441`, x + 44, y + 145, 26, MUTED, "left", 400);
+  text("\u043a\u0440\u0435\u0434\u0438\u0442\u043d\u044b\u043c \u043f\u043b\u0435\u0447\u043e\u043c", x + 44, y + 181, 26, MUTED, "left", 400);
+  text("\u0434\u043e 200x", x + 44, y + 217, 26, MUTED, "left", 400);
+  text(volume, x + 44, y + 246, 27, MUTED, "left", 400);
 }
 
 function drawHomePerpsStrip(y) {
@@ -2302,7 +2302,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas125");
+  supportRow(980, "Версия интерфейса", "canvas126");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
