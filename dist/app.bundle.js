@@ -874,12 +874,13 @@ function drawHomeTabs(y) {
 }
 
 function drawCompactTopBar() {
-  rect(0, 0, 1080, 142, BG, 0);
-  drawThinGearIcon(86, 88, 54, MUTED);
-  circle(132, 36, 11, RED);
-  text(`${money(walletTotalUsd())} $`, 540, 98, 43, TEXT, "center", 800, true);
-  drawSearch(824, 86, MUTED, 0.6);
-  drawScanCorners(980, 86, 50, MUTED, 5.5);
+  rect(0, 0, 1080, 118, BG, 0);
+  drawThinGearIcon(42, 30, 34, MUTED);
+  circle(74, 10, 8, RED);
+  text(`${money(walletTotalUsd())} $`, 540, 31, 35, TEXT, "center", 800, true);
+  rect(478, 58, 124, 4, GREEN, 2);
+  drawSearch(896, 28, MUTED, 0.42);
+  drawScanCorners(996, 28, 30, MUTED, 4.5);
 }
 
 function drawTopSettingsButton(box) {
@@ -2303,7 +2304,7 @@ function drawAboutSheet() {
   circleImg("assets/native-ui/reward-tier-bronze.png", 470, 450, 140);
   text("Trust Wallet WEB", 540, 735, 48, TEXT, "center", 700);
   text("Canvas PWA prototype", 540, 790, 32, MUTED, "center", 400);
-  supportRow(980, "Версия интерфейса", "canvas120");
+  supportRow(980, "Версия интерфейса", "canvas121");
   supportRow(1140, "Service worker", "trust-visual-web-v36");
   supportRow(1300, "Сеть теста", "LAN / Android Chrome");
   rect(88, 1710, 904, 126, "#232427", 63);
